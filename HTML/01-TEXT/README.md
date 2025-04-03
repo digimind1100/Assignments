@@ -32,8 +32,8 @@
 
 **Draw a Line:** Create a horizontal line between sections using the `<h>`r tag.
 
-**Exercise 4:** Strong, Emphasis, and More
-Strong Text: Write a phrase and make part of it stronger using the ``<strong>`` tag.
+# Exercise 4: # Strong, Emphasis, and More
+**Strong Text:** Write a phrase and make part of it stronger using the ``<strong>`` tag.
 
 **Emphasis:** Write a phrase and emphasize part of it using the ``<em>`` tag.
 
