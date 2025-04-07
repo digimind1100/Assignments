@@ -1,0 +1,182 @@
+rapidmovers.pk website have a freight calculation panel at home page can you help me to generate the similar or better freight calculation panel for an other website. It should contain following fields, "within city" "out side city" "full name" "mobile number" "email" "from" "to" "select vehicle" and in dropdown must be following vehicle list 1. Shahzor 9Ft open. 2. Mazda 12/14 ft. 3. Mazda 14/16 (Containerized). 4. Mazda 17' (Containerized). 5. 20Ft Container standard. 6. 40Ft container standard. 7. Mazda 12 Ton. 8.   "select date". After submit data transfer to website data base and the amount appear on website that customer can see the cost of vehicle freight. You can assume freight rates by your self just for an examples.
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Freight Calculation Panel</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      padding: 20px;
+    }
+    .calc-container {
+      background: #fff;
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .calc-container h2 {
+      text-align: center;
+    }
+    .calc-container label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    .calc-container input[type="text"],
+    .calc-container input[type="email"],
+    .calc-container input[type="date"],
+    .calc-container select {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    .radio-group {
+      margin-top: 10px;
+    }
+    .radio-group input {
+      margin-right: 5px;
+    }
+    .calc-container button {
+      width: 100%;
+      background: #007BFF;
+      color: #fff;
+      border: none;
+      padding: 10px;
+      margin-top: 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    .calc-container button:hover {
+      background: #0056b3;
+    }
+    .result {
+      margin-top: 20px;
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+      color: #28a745;
+    }
+  </style>
+</head>
+<body>
+  <div class="calc-container">
+    <h2>Freight Calculator</h2>
+    <form id="freightForm">
+      <!-- Delivery Type -->
+      <label>Delivery Type</label>
+      <div class="radio-group">
+        <input type="radio" id="withinCity" name="deliveryType" value="within" checked>
+        <label for="withinCity" style="display: inline;">Within City</label>
+        <input type="radio" id="outsideCity" name="deliveryType" value="outside">
+        <label for="outsideCity" style="display: inline;">Outside City</label>
+      </div>
+      
+      <!-- Personal Information -->
+      <label for="fullName">Full Name</label>
+      <input type="text" id="fullName" name="fullName" required>
+      
+      <label for="mobile">Mobile Number</label>
+      <input type="text" id="mobile" name="mobile" required>
+      
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required>
+      
+      <!-- Trip Details -->
+      <label for="from">From</label>
+      <input type="text" id="from" name="from" required>
+      
+      <label for="to">To</label>
+      <input type="text" id="to" name="to" required>
+      
+      <!-- Vehicle Selection -->
+      <label for="vehicle">Select Vehicle</label>
+      <select id="vehicle" name="vehicle" required>
+        <option value="">--Select Vehicle--</option>
+        <option value="shahzor">Shahzor 9Ft open</option>
+        <option value="mazda12">Mazda 12/14 ft</option>
+        <option value="mazda14">Mazda 14/16 (Containerized)</option>
+        <option value="mazda17">Mazda 17' (Containerized)</option>
+        <option value="container20">20Ft Container standard</option>
+        <option value="container40">40Ft container standard</option>
+        <option value="mazda12ton">Mazda 12 Ton</option>
+      </select>
+      
+      <!-- Date Selection -->
+      <label for="selectDate">Select Date</label>
+      <input type="date" id="selectDate" name="selectDate" required>
+      
+      <!-- Submit Button -->
+      <button type="submit">Calculate Freight</button>
+    </form>
+    
+    <div id="result" class="result"></div>
+  </div>
+  
+  <script>
+    // Assumed freight rates for within city and outside city
+    const freightRates = {
+      within: {
+        shahzor: 50,
+        mazda12: 70,
+        mazda14: 80,
+        mazda17: 90,
+        container20: 100,
+        container40: 120,
+        mazda12ton: 150
+      },
+      outside: {
+        shahzor: 75,
+        mazda12: 105,
+        mazda14: 120,
+        mazda17: 135,
+        container20: 150,
+        container40: 180,
+        mazda12ton: 225
+      }
+    };
+
+    document.getElementById('freightForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Gather form values
+      const deliveryType = document.querySelector('input[name="deliveryType"]:checked').value;
+      const fullName = document.getElementById('fullName').value;
+      const mobile = document.getElementById('mobile').value;
+      const email = document.getElementById('email').value;
+      const from = document.getElementById('from').value;
+      const to = document.getElementById('to').value;
+      const vehicle = document.getElementById('vehicle').value;
+      const selectDate = document.getElementById('selectDate').value;
+      
+      // Basic validation check (you may extend this as needed)
+      if (!vehicle) {
+        alert('Please select a vehicle.');
+        return;
+      }
+      
+      // Calculate freight cost based on delivery type and vehicle selection
+      const rates = freightRates[deliveryType];
+      const cost = rates[vehicle];
+      
+      // (Optional) Here you could send the form data to your database via AJAX
+      // For example, using fetch to your API endpoint.
+      // fetch('/your-backend-api', { method: 'POST', body: JSON.stringify({...}) })
+      
+      // Display the calculated cost to the customer
+      document.getElementById('result').innerText = `Estimated Freight Cost: $${cost}`;
+    });
+  </script>
+</body>
+</html>
+double click "crack.reg".
