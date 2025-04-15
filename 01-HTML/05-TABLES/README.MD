@@ -40,7 +40,7 @@ Instructions:
 
 Instructions:
 
-1. Use <table>, <thead>, <tbody>, and <tfoot>.
+1. Use `<table>`, `<thead>`, `<tbody>`, and `<tfoot>`.
 
 2. Create 3 columns: Item, Quantity, Price.
 
